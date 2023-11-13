@@ -10,7 +10,7 @@ const handler = NextAuth({
       clientSecret: process.env.CLIENT_SECRET,
     }),
   ],
-  callback: {
+  callbacks: {
     async session({ session }) {
       const sessionUser = await User.findOne({ email: session.user.email });
       session.user.id = sessionUser._id.toString();
@@ -27,11 +27,10 @@ const handler = NextAuth({
         if (!userExists) {
           await User.create({
             email: profile.email,
-            username: profile.name.replace(" ", "").toLowerCase(),
+            username: profile.name.replace(/ /g, "").toLowerCase(),
             image: profile.picture,
           });
         }
-        console.log("Profile:", profile);
         return true;
       } catch (error) {
         console.log(error);
