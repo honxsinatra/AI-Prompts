@@ -19,7 +19,7 @@ const CreatePrompt = () => {
     try {
       const response = await fetch("/api/prompt/new", {
         method: "POST",
-        body: JSON.stringfy({
+        body: JSON.stringify({
           prompt: post.prompt,
           userId: session?.user.id,
           tag: post.tag,

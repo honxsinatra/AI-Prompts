@@ -5,7 +5,7 @@ import PromptCard from "./PromptCard";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
-    <div className="mt-16 promt_layout">
+    <div className="mt-16 prompt_layout">
       {data.map((post) => (
         <PromptCard
           key={post._id}
@@ -27,6 +27,7 @@ const Feed = () => {
       const data = await response.json();
       setPosts(data);
     };
+
     fetchPosts();
   }, []);
 
@@ -42,7 +43,7 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      <PromptCardList data={posts} handleTagClick={handleTagClick} />
+      <PromptCardList data={posts} handleTagClick={() => {}} />
     </section>
   );
 };

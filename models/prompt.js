@@ -1,5 +1,4 @@
 import { model, Schema, models } from "mongoose";
-import User from "./user";
 
 const PromptSchema = new Schema({
   creator: {
