@@ -8,7 +8,7 @@ import Profile from "@components/Profile";
 
 const MyProfile = () => {
   const router = useRouter();
-  const { data: session } = useSession;
+  const { data: session } = useSession();
 
   const [posts, setPosts] = useState([]);
 
@@ -20,7 +20,7 @@ const MyProfile = () => {
     };
 
     if (session?.user.id) fetchPosts();
-  }, []);
+  }, [session]);
 
   const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`);
@@ -32,12 +32,13 @@ const MyProfile = () => {
     );
     if (hasConfirmed)
       try {
-        await fetch(`/api/prompt/${post._id.toString()}`, { method: DELETE });
+        await fetch(`/api/prompt/${post._id.toString()}`, { method: "DELETE" });
         const filteredPosts = posts.filter((p) => p._id !== post_id);
         setPosts(filteredPosts);
       } catch (error) {
         console.log(error);
       }
+    router.push(`/`);
   };
 
   return (
